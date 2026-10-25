@@ -6,14 +6,20 @@ import { getPublishedPosts } from '../../utils/posts';
 const categories = ['건강', '생활 정보', '뉴스', '기타'];
 const slugFor = (category: string) => category.replaceAll(' ', '-');
 
+
 export function getStaticPaths() {
   const categoryList = ['건강', '생활 정보', '뉴스', '기타'];
 
   return categoryList.map((category) => ({
-    params: { category: slugFor(category) },
-    props: { category },
+    params: {
+      category: category.replaceAll(' ', '-'),
+    },
+    props: {
+      category,
+    },
   }));
 }
+
 const { category } = Astro.props;
 const allPosts = await getPublishedPosts();
 const posts = allPosts.filter((post) => post.data.category === category);

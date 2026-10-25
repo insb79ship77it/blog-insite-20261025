@@ -28,10 +28,12 @@ const posts = allPosts
 ---
 
 <BaseLayout title={`${category} | 정보꾸러미 인사이트`}>
-  <section class="page-heading">
-    <h1>{category}</h1>
-    <p>{category} 카테고리의 글을 모아 볼 수 있습니다.</p>
-  </section>
+  <div class="wrap">
+    <section class="page-intro">
+      <h1>{category}</h1>
+      <p>{category} 카테고리의 글을 모아 볼 수 있습니다.</p>
+    </section>
 
-  <PostList posts={posts} />
+    <PostList posts={posts} />
+  </div>
 </BaseLayout>

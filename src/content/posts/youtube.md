@@ -6,6 +6,24 @@ category: "뉴스"
 tags: ["뉴스", "유튜브", "자영업자", "별점테러"]
 ---
 
+<div class="youtube-container">
+  <iframe
+    src="https://www.youtube.com/embed/hzVL0CMUkao?autoplay=1&mute=1&playsinline=1&rel=0"
+    title="황당한 사유로 별점 1점을 받은 자영업자들"
+    frameborder="0"
+    allow="autoplay; encrypted-media; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<p>
+  <a href="https://www.youtube.com/watch?v=hzVL0CMUkao" target="_blank" rel="noopener noreferrer">
+    YouTube에서 영상 보기
+  </a>
+</p>
+
+---
+
 # 🎬 유튜브 뉴스 요약: 황당한 사유로 별점 1점을 받은 자영업자들
 
 [![영상 보러가기](https://img.youtube.com/vi/hzVL0CMUkao/hqdefault.jpg)](https://www.youtube.com/watch?v=hzVL0CMUkao)

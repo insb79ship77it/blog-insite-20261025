@@ -16,7 +16,7 @@ tags: ["뉴스", "유튜브", "자영업자", "별점테러"]
   </iframe>
 </div>
 
-[유튜브에서 바로보기](https://www.youtube.com/watch?v=hzVL0CMUkao)
+[유튜브에서 바로보기](https://www.youtube.com/watch?v=hzVL0CMUkao){: target="_blank"}
 
 
 ---

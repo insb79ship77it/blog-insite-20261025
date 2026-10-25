@@ -52,10 +52,10 @@ main { min-height: 65vh; }
 .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; }
 .category { display: inline-block; color: #555; background: #f5f5f4; border: 1px solid #e7e5e4; border-radius: 999px; padding: 1px 9px; text-decoration: none; font-weight: 650; }
 .category:hover { text-decoration: none; opacity: .85; }
-.category-health { color: #a34f35; background: #fff0e9; border-color: #f7d3c4; }
-.category-life { color: #26745d; background: #eaf7f0; border-color: #cce9d9; }
-.category-news { color: #3f61a8; background: #edf2ff; border-color: #d4defb; }
-.category-etc { color: #8052a2; background: #f5edfb; border-color: #e6d5f3; }
+.category-health { color: #a34f35; }
+.category-life { color: #26745d; }
+.category-news { color: #3f61a8; }
+.category-etc { color: #8052a2; }
 .post-item h3 { font-size: 21px; line-height: 1.45; letter-spacing: -.035em; margin: 9px 0 6px; }
 .post-item h3 a { text-decoration: none; }
 .post-item p { margin: 0; color: var(--muted); font-size: 15px; }

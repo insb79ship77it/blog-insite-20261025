@@ -6,6 +6,7 @@ interface Post {
   data: {
     title: string;
     description: string;
+    image?: string;
     pubDate: Date;
     category: string;
     tags: string[];
@@ -18,8 +19,12 @@ const { posts } = Astro.props;
   <ul class="post-list">
     {posts.map((post) => (
       <li class="post-item">
+        <a class="post-thumb" href={`/posts/${post.id.replace(/\.md$/, '')}/`} aria-label={`${post.data.title} 글 보기`}>
+          <img src={post.data.image || 'https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg'} alt="" loading="lazy" />
+        </a>
+        <div class="post-content">
         <div class="meta">
-          <a class="category" href={`/category/${categorySlug(post.data.category)}/`}>{post.data.category}</a>
+          <a class={`category category-${post.data.category === '건강' ? 'health' : post.data.category === '생활 정보' ? 'life' : post.data.category === '뉴스' ? 'news' : 'etc'}`} href={`/category/${categorySlug(post.data.category)}/`}>{post.data.category}</a>
           <span>{formatDate(post.data.pubDate)}</span>
         </div>
         <h3><a href={`/posts/${post.id.replace(/\.md$/, '')}/`}>{post.data.title}</a></h3>
@@ -29,6 +34,7 @@ const { posts } = Astro.props;
             {post.data.tags.map((tag) => <span class="tag">#{tag}</span>)}
           </div>
         )}
+        </div>
       </li>
     ))}
   </ul>

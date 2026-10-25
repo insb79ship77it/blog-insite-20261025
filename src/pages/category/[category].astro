@@ -3,17 +3,13 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../../components/PostList.astro';
 
-const categories = ['건강', '생활 정보', '뉴스', '기타'];
-
 export function getStaticPaths() {
-  return categories.map((category) => ({
-    params: {
-      category: category.replace(/\s+/g, '-'),
-    },
-    props: {
-      category,
-    },
-  }));
+  return [
+    { params: { category: '건강' }, props: { category: '건강' } },
+    { params: { category: '생활-정보' }, props: { category: '생활 정보' } },
+    { params: { category: '뉴스' }, props: { category: '뉴스' } },
+    { params: { category: '기타' }, props: { category: '기타' } },
+  ];
 }
 
 const { category } = Astro.props;

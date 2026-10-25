@@ -87,3 +87,25 @@ main { min-height: 65vh; }
   .prose { font-size: 16px; }
   .footer-inner { align-items: flex-start; flex-direction: column; }
 }
+
+/* add */
+/* 모든 페이지의 공통 콘텐츠 너비 및 좌우 여백 */
+main > .wrap,
+main .page-heading,
+main .page-intro,
+main .article,
+main .simple-content {
+  width: min(calc(100% - 40px), var(--max));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 700px) {
+  main > .wrap,
+  main .page-heading,
+  main .page-intro,
+  main .article,
+  main .simple-content {
+    width: calc(100% - 32px);
+  }
+}

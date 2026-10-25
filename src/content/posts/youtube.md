@@ -26,9 +26,7 @@ tags: ["뉴스", "유튜브", "자영업자", "별점테러"]
 
 # 🎬 유튜브 뉴스 요약: 황당한 사유로 별점 1점을 받은 자영업자들
 
-[![영상 보러가기](https://img.youtube.com/vi/hzVL0CMUkao/hqdefault.jpg)](https://www.youtube.com/watch?v=hzVL0CMUkao)
-> 👆 **위 이미지를 클릭하면 YouTube 영상으로 이동하여 직접 재생할 수 있습니다.**  
-> 🔗 **직접 링크:** [YouTube에서 영상 시청하기](https://www.youtube.com/watch?v=hzVL0CMUkao)
+
 
 ---
 

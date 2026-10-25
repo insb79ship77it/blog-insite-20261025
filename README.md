@@ -77,3 +77,4 @@ GitHub 저장소를 Cloudflare Pages에 연결할 때 일반적인 설정은 다
 - Google Search Console 및 네이버 서치어드바이저 등록
 
 이 프로젝트는 시작용 기본 구조입니다. 검색 노출이나 색인 여부를 보장하지 않습니다.
+

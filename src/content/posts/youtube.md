@@ -16,11 +16,8 @@ tags: ["뉴스", "유튜브", "자영업자", "별점테러"]
   </iframe>
 </div>
 
-<p>
-  <a href="https://www.youtube.com/watch?v=hzVL0CMUkao" target="_blank" rel="noopener noreferrer">
-    YouTube에서 영상 보기
-  </a>
-</p>
+[유튜브에서 바로보기](https://www.youtube.com/watch?v=hzVL0CMUkao)
+
 
 ---
 

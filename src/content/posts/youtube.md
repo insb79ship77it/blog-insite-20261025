@@ -8,7 +8,7 @@ tags: ["뉴스", "유튜브", "자영업자", "별점테러"]
 
 <div class="youtube-container">
   <iframe
-    src="https://www.youtube.com/embed/hzVL0CMUkao?autoplay=1&mute=1&playsinline=1&rel=0"
+    src="https://www.youtube.com/embed/hzVL0CMUkao"
     title="황당한 사유로 별점 1점을 받은 자영업자들"
     frameborder="0"
     allow="autoplay=0; encrypted-media; picture-in-picture"

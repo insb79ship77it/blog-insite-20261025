@@ -1,6 +1,29 @@
 ---
 import { categorySlug, formatDate } from '../utils/posts';
 
+
+const getThumbnail = (post) => {
+  const body = post.body ?? '';
+
+  // 본문의 첫 번째 Markdown 이미지
+  const markdownImage = body.match(
+    /!\[[^\]]*\]\((https?:\/\/[^)\s]+)(?:\s+["'][^)]*["'])?\)/
+  );
+
+  if (markdownImage) return markdownImage[1];
+
+  // 본문에 작성된 HTML 이미지
+  const htmlImage = body.match(
+    /<img\b[^>]*\bsrc=["'](https?:\/\/[^"']+)["']/i
+  );
+
+  if (htmlImage) return htmlImage[1];
+
+  // 본문 이미지가 없으면 개별 지정 이미지 사용
+  return post.data.image || 'https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg';
+};
+
+
 interface Post {
   id: string;
   data: {

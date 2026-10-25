@@ -56,8 +56,8 @@ const getThumbnail = (post: Post): string => {
     return post.data.image;
   }
 
-  // 5. 기본 썸네일
-  return 'https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg';
+  // 5. 사용할 이미지가 없으면 빈 문자열 반환
+  return '';
 };
 
 interface Props {
@@ -72,17 +72,21 @@ const { posts } = Astro.props;
     <ul class="post-list">
       {posts.map((post) => (
         <li class="post-item">
-          <a
-            class="post-thumb"
-            href={`/posts/${post.id.replace(/\.md$/, '')}/`}
-            aria-label={`${post.data.title} 글 보기`}
-          >
-            <img
-              src={getThumbnail(post)}
-              alt={post.data.title}
-              loading="lazy"
-            />
-          </a>
+<a
+  class="post-thumb"
+  href={`/posts/${post.id.replace(/\.md$/, '')}/`}
+  aria-label={`${post.data.title} 글 보기`}
+>
+  {
+    getThumbnail(post) && (
+      <img
+        src={getThumbnail(post)}
+        alt={post.data.title}
+        loading="lazy"
+      />
+    )
+  }
+</a>
 
           <div class="post-content">
             <div class="meta">

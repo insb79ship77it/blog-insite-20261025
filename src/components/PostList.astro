@@ -35,7 +35,7 @@ const getThumbnail = (post: Post): string => {
 
   // 유튜브 썸네일이 아닌 일반 이미지 우선
   const normalImage = images.find(
-    (url) => !/img\.youtube\.com|i\.ytimg\.com/i.test(url)
+    (url) => !/i\.ytimg\.com/i.test(url)
   );
 
   if (normalImage) {

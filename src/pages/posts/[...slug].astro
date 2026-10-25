@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPublishedPosts, categorySlug, formatDate } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id.replace(/\.md$/, '') }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const allPosts = await getPublishedPosts();
+const related = allPosts.filter((item) => item.id !== post.id && item.data.category === post.data.category).slice(0, 3);
+---
+<BaseLayout title={`${post.data.title} | 정보꾸러미 인사이트`} description={post.data.description} canonicalPath={`/posts/${post.id.replace(/\.md$/, '')}/`}>
+  <article class="wrap article">
+    <header class="article-header">
+      <div class="meta">
+        <a class="category" href={`/category/${categorySlug(post.data.category)}/`}>{post.data.category}</a>
+        <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+      </div>
+      <h1>{post.data.title}</h1>
+      <p class="article-description">{post.data.description}</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    {post.data.tags.length > 0 && <div class="tags">{post.data.tags.map((tag) => <span class="tag">#{tag}</span>)}</div>}
+    {related.length > 0 && (
+      <section class="related">
+        <div class="section-head"><h2>관련 글</h2><a href={`/category/${categorySlug(post.data.category)}/`}>카테고리 더 보기 →</a></div>
+        <PostList posts={related} />
+      </section>
+    )}
+  </article>
+</BaseLayout>

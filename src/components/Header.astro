@@ -1,0 +1,19 @@
+---
+const currentPath = Astro.url.pathname;
+const menu = [
+  { label: '건강', href: '/category/건강/' },
+  { label: '생활 정보', href: '/category/생활-정보/' },
+  { label: '뉴스', href: '/category/뉴스/' },
+  { label: '기타', href: '/category/기타/' },
+];
+---
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="정보꾸러미 인사이트 홈">정보꾸러미 인사이트</a>
+    <nav class="nav" aria-label="주요 메뉴">
+      {menu.map((item) => (
+        <a href={item.href} aria-current={currentPath.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

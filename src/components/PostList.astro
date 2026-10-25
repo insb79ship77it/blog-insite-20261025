@@ -1,0 +1,37 @@
+---
+import { categorySlug, formatDate } from '../utils/posts';
+
+interface Post {
+  id: string;
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    category: string;
+    tags: string[];
+  };
+}
+interface Props { posts: Post[]; }
+const { posts } = Astro.props;
+---
+{posts.length ? (
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li class="post-item">
+        <div class="meta">
+          <a class="category" href={`/category/${categorySlug(post.data.category)}/`}>{post.data.category}</a>
+          <span>{formatDate(post.data.pubDate)}</span>
+        </div>
+        <h3><a href={`/posts/${post.id.replace(/\.md$/, '')}/`}>{post.data.title}</a></h3>
+        <p>{post.data.description}</p>
+        {post.data.tags.length > 0 && (
+          <div class="tags">
+            {post.data.tags.map((tag) => <span class="tag">#{tag}</span>)}
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+) : (
+  <p class="empty">아직 등록된 글이 없습니다. Markdown 글을 추가하면 이곳에 표시됩니다.</p>
+)}

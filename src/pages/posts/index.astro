@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPublishedPosts } from '../../utils/posts';
+const posts = await getPublishedPosts();
+---
+<BaseLayout title="전체 글 | 정보꾸러미 인사이트" description="정보꾸러미 인사이트에 게시된 모든 글을 확인하세요.">
+  <div class="wrap">
+    <section class="page-intro">
+      <p class="eyebrow">ARCHIVE</p>
+      <h1>전체 글</h1>
+      <p>게시된 글을 최신순으로 확인할 수 있습니다.</p>
+      <nav class="category-nav" aria-label="카테고리">
+        <a href="/category/건강/">건강</a>
+        <a href="/category/생활-정보/">생활 정보</a>
+        <a href="/category/뉴스/">뉴스</a>
+        <a href="/category/기타/">기타</a>
+      </nav>
+    </section>
+    <PostList posts={posts} />
+  </div>
+</BaseLayout>

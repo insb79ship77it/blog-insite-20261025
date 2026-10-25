@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import { getPublishedPosts } from '../utils/posts';
+
+const posts = await getPublishedPosts();
+const recentPosts = posts.slice(0, 10);
+---
+<BaseLayout>
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">생활에 필요한 정보를 한곳에</p>
+      <h1>정보꾸러미 인사이트</h1>
+      <p>건강부터 생활 정보, 뉴스까지. 일상에서 궁금했던 내용을 이해하기 쉽게 살펴보고, 필요한 정보를 차근차근 찾아볼 수 있도록 정리합니다.</p>
+      <nav class="category-nav" aria-label="카테고리 바로가기">
+        <a href="/category/건강/">건강</a>
+        <a href="/category/생활-정보/">생활 정보</a>
+        <a href="/category/뉴스/">뉴스</a>
+        <a href="/category/기타/">기타</a>
+      </nav>
+    </section>
+    <section aria-labelledby="recent-posts">
+      <div class="section-head">
+        <h2 id="recent-posts">최근 글</h2>
+        <a href="/posts/">전체 글 보기 →</a>
+      </div>
+      <PostList posts={recentPosts} />
+    </section>
+  </div>
+</BaseLayout>

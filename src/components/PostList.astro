@@ -43,7 +43,7 @@ const { posts } = Astro.props;
     {posts.map((post) => (
       <li class="post-item">
         <a class="post-thumb" href={`/posts/${post.id.replace(/\.md$/, '')}/`} aria-label={`${post.data.title} 글 보기`}>
-          <img src={post.data.image || 'https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg'} alt="" loading="lazy" />
+          <img src={getThumbnail(post)} alt={post.data.title} loading="lazy" />
         </a>
         <div class="post-content">
         <div class="meta">

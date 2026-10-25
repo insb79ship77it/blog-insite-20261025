@@ -32,7 +32,7 @@ tags: ["테스트", "건강", "마크다운"]
 
 [OpenAI 웹사이트 열기](https://openai.com)
 
-![건강 테스트 이미지](https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg)
+![건강 테스트 이미지](https://img.youtube.com/vi/4UJPWihPgfg/maxresdefault.jpg)
 
 ## 표 테스트
 

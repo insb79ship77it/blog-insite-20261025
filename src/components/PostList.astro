@@ -1,71 +1,9 @@
 ---
 import { categorySlug, formatDate } from '../utils/posts';
 
-
-const getThumbnail = (post) => {
-  const body = post.body ?? '';
-
-  // 1. 본문에 있는 일반 이미지 우선
-  const markdownImages = [
-    ...body.matchAll(/!\[[^\]]*\]\((https?:\/\/[^)\s]+)[^)]*\)/g),
-  ];
-
-  const htmlImages = [
-    ...body.matchAll(/<img\b[^>]*\bsrc=["'](https?:\/\/[^"']+)["']/gi),
-  ];
-
-  const images = [
-    ...markdownImages.map((m) => m[1]),
-    ...htmlImages.map((m) => m[1]),
-  ];
-
-  const normalImage = images.find(
-    (url) => !/img\.youtube\.com|i\.ytimg\.com/i.test(url)
-  );
-
-  if (normalImage) return normalImage;
-
-  // 2. 본문에서 유튜브 영상 ID 찾기
-  const youtubeMatch = body.match(
-    /(?:youtube\.com\/(?:watch\?(?:[^#\s]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
-  );
-
-  if (youtubeMatch) {
-    return `https://img.youtube.com/vi/${youtubeMatch[1]}/hqdefault.jpg`;
-  }
-
-  // 3. Frontmatter image 사용
-  if (post.data.image) return post.data.image;
-
-  // 4. 기본 썸네일
-  return 'https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg';
-};
-
-
-const getThumbnail = (post) => {
-  const body = post.body ?? '';
-
-  // 본문의 첫 번째 Markdown 이미지
-  const markdownImage = body.match(
-    /!\[[^\]]*\]\((https?:\/\/[^)\s]+)(?:\s+["'][^)]*["'])?\)/
-  );
-
-  if (markdownImage) return markdownImage[1];
-
-  // 본문에 작성된 HTML 이미지
-  const htmlImage = body.match(
-    /<img\b[^>]*\bsrc=["'](https?:\/\/[^"']+)["']/i
-  );
-
-  if (htmlImage) return htmlImage[1];
-
-  // 본문 이미지가 없으면 개별 지정 이미지 사용
-  return post.data.image || 'https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg';
-};
-
-
 interface Post {
   id: string;
+  body?: string;
   data: {
     title: string;
     description: string;
@@ -75,36 +13,119 @@ interface Post {
     tags: string[];
   };
 }
-interface Props { posts: Post[]; }
+
+// 게시글 썸네일 선택
+const getThumbnail = (post: Post): string => {
+  const body = post.body ?? '';
+
+  // 1. 본문에서 Markdown 이미지 추출
+  const markdownImages = [
+    ...body.matchAll(/!\[[^\]]*\]\((https?:\/\/[^)\s]+)(?:[^)]*)\)/g),
+  ];
+
+  // 2. 본문에서 HTML 이미지 추출
+  const htmlImages = [
+    ...body.matchAll(/<img\b[^>]*\bsrc=["'](https?:\/\/[^"']+)["']/gi),
+  ];
+
+  const images = [
+    ...markdownImages.map((match) => match[1]),
+    ...htmlImages.map((match) => match[1]),
+  ];
+
+  // 유튜브 썸네일이 아닌 일반 이미지 우선
+  const normalImage = images.find(
+    (url) => !/img\.youtube\.com|i\.ytimg\.com/i.test(url)
+  );
+
+  if (normalImage) {
+    return normalImage;
+  }
+
+  // 3. 본문에서 유튜브 영상 ID 추출
+  const youtubeMatch = body.match(
+    /(?:youtube\.com\/(?:watch\?(?:[^#\s]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  );
+
+  if (youtubeMatch) {
+    return `https://img.youtube.com/vi/${youtubeMatch[1]}/hqdefault.jpg`;
+  }
+
+  // 4. Frontmatter에 지정한 이미지 사용
+  if (post.data.image) {
+    return post.data.image;
+  }
+
+  // 5. 기본 썸네일
+  return 'https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg';
+};
+
+interface Props {
+  posts: Post[];
+}
+
 const { posts } = Astro.props;
 ---
-{posts.length ? (
-  <ul class="post-list">
-    {posts.map((post) => (
-      <li class="post-item">
-        <a class="post-thumb" href={`/posts/${post.id.replace(/\.md$/, '')}/`} aria-label={`${post.data.title} 글 보기`}>
-          <img
-            src={getThumbnail(post)}
-            alt={post.data.title}
-            loading="lazy"
-          />
-        </a>
-        <div class="post-content">
-        <div class="meta">
-          <a class={`category category-${post.data.category === '건강' ? 'health' : post.data.category === '생활 정보' ? 'life' : post.data.category === '뉴스' ? 'news' : 'etc'}`} href={`/category/${categorySlug(post.data.category)}/`}>{post.data.category}</a>
-          <span>{formatDate(post.data.pubDate)}</span>
-        </div>
-        <h3><a href={`/posts/${post.id.replace(/\.md$/, '')}/`}>{post.data.title}</a></h3>
-        <p>{post.data.description}</p>
-        {post.data.tags.length > 0 && (
-          <div class="tags">
-            {post.data.tags.map((tag) => <span class="tag">#{tag}</span>)}
+
+{
+  posts.length ? (
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <a
+            class="post-thumb"
+            href={`/posts/${post.id.replace(/\.md$/, '')}/`}
+            aria-label={`${post.data.title} 글 보기`}
+          >
+            <img
+              src={getThumbnail(post)}
+              alt={post.data.title}
+              loading="lazy"
+            />
+          </a>
+
+          <div class="post-content">
+            <div class="meta">
+              <a
+                class={`category category-${
+                  post.data.category === '건강'
+                    ? 'health'
+                    : post.data.category === '생활 정보'
+                      ? 'life'
+                      : post.data.category === '뉴스'
+                        ? 'news'
+                        : 'etc'
+                }`}
+                href={`/category/${categorySlug(post.data.category)}/`}
+              >
+                {post.data.category}
+              </a>
+
+              <span>{formatDate(post.data.pubDate)}</span>
+            </div>
+
+            <h3>
+              <a href={`/posts/${post.id.replace(/\.md$/, '')}/`}>
+                {post.data.title}
+              </a>
+            </h3>
+
+            <p>{post.data.description}</p>
+
+            {post.data.tags.length > 0 && (
+              <div class="tags">
+                {post.data.tags.map((tag) => (
+                  <span class="tag">#{tag}</span>
+                ))}
+              </div>
+            )}
           </div>
-        )}
-        </div>
-      </li>
-    ))}
-  </ul>
-) : (
-  <p class="empty">아직 등록된 글이 없습니다. Markdown 글을 추가하면 이곳에 표시됩니다.</p>
-)}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="empty">
+      아직 등록된 글이 없습니다. Markdown 글을 추가하면 이곳에 표시됩니다.
+    </p>
+  )
+}

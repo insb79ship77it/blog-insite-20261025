@@ -1,12 +1,11 @@
-
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../../components/PostList.astro';
 
-export async function getStaticPaths() {
-  const categories = ['건강', '생활 정보', '뉴스', '기타'];
+const categories = ['건강', '생활 정보', '뉴스', '기타'];
 
+export function getStaticPaths() {
   return categories.map((category) => ({
     params: {
       category: category.replace(/\s+/g, '-'),

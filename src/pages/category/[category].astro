@@ -1,30 +1,42 @@
+
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../../components/PostList.astro';
-import { getPublishedPosts } from '../../utils/posts';
 
-const categories = ['건강', '생활 정보', '뉴스', '기타'];
-const slugFor = (category: string) => category.replaceAll(' ', '-');
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const categories = ['건강', '생활 정보', '뉴스', '기타'];
+
   return categories.map((category) => ({
-    params: { category: slugFor(category) },
-    props: { category },
+    params: {
+      category: category.replace(/\s+/g, '-'),
+    },
+    props: {
+      category,
+    },
   }));
 }
+
 const { category } = Astro.props;
-const allPosts = await getPublishedPosts();
-const posts = allPosts.filter((post) => post.data.category === category);
+
+const allPosts = await getCollection(
+  'posts',
+  ({ data }) => data.draft !== true
+);
+
+const posts = allPosts
+  .filter((post) => post.data.category === category)
+  .sort(
+    (a, b) =>
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
 ---
-<BaseLayout title={`${category} | 정보꾸러미 인사이트`} description={`${category} 카테고리의 글을 모아 확인하세요.`}>
-  <div class="wrap">
-    <section class="page-intro">
-      <p class="eyebrow">CATEGORY</p>
-      <h1>{category}</h1>
-      <p>{category} 관련 글을 모아 정리했습니다.</p>
-      <nav class="category-nav" aria-label="카테고리">
-        {categories.map((item) => <a class:list={{ active: item === category }} href={`/category/${slugFor(item)}/`}>{item}</a>)}
-      </nav>
-    </section>
-    <PostList posts={posts} />
-  </div>
+
+<BaseLayout title={`${category} | 정보꾸러미 인사이트`}>
+  <section class="page-heading">
+    <h1>{category}</h1>
+    <p>{category} 카테고리의 글을 모아 볼 수 있습니다.</p>
+  </section>
+
+  <PostList posts={posts} />
 </BaseLayout>

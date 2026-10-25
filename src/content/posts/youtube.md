@@ -1,7 +1,7 @@
 ---
 title: "황당한 사유로 별점 1점을 받은 자영업자들"
 description: "황당한 사유로 별점 1점을 받은 자영업자들 사연을 소개합니다."
-pubDate: 2026-10-22
+pubDate: 2026-10-25
 category: "뉴스"
 tags: ["뉴스", "유튜브", "자영업자", "별점테러"]
 ---
@@ -11,7 +11,7 @@ tags: ["뉴스", "유튜브", "자영업자", "별점테러"]
 [![영상 보러가기](https://img.youtube.com/vi/hzVL0CMUkao/hqdefault.jpg)](https://www.youtube.com/watch?v=hzVL0CMUkao)
 > 👆 **위 이미지를 클릭하면 YouTube 영상으로 이동하여 직접 재생할 수 있습니다.**  
 > 🔗 **직접 링크:** [YouTube에서 영상 시청하기](https://www.youtube.com/watch?v=hzVL0CMUkao)
->https://www.youtube.com/watch?v=hzVL0CMUkao
+
 ---
 
 ## 📝 1. 사건 핵심 요약 (~400자)

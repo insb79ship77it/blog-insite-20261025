@@ -36,6 +36,6 @@ tags: ["테스트", "뉴스", "정보"]
 
 [참고 링크](https://www.wikipedia.org/)
 
-![뉴스 테스트 이미지](https://img.youtube.com/vi/VGkoaHyVUdg/maxresdefault.jpg)
+
 
 <span style="color: #b45309;">주의가 필요한 내용을 색상으로 구분하는 예시입니다.</span>
